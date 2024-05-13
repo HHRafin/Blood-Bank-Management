@@ -1,0 +1,14 @@
+// Insert data into database
+$stmt = $conn->prepare("INSERT INTO donor_personal (DonorName, Gender, DateOfBirth, MobileNumber) VALUES ('John Doe', 'Male', '1990-01-01', '1234567890')");
+
+// Fetch donor information by blood group
+$sql = "SELECT dp.DonorID, dp.DonorName, dp.Gender, dp.DateOfBirth, dp.MobileNumber, dh.Weight, dh.BloodPressure, dh.IronContent, dh.BloodBankName, dh.BloodGroup 
+        FROM donor_personal dp
+        LEFT JOIN donor_health dh ON dp.DonorID = dh.DonorID
+        WHERE dh.BloodGroup = 'A+'";
+
+// Fetch donor information from both tables
+$sql = "SELECT dp.DonorID, dp.DonorName, dp.Gender, dp.DateOfBirth, dp.MobileNumber, dh.Weight, dh.BloodPressure, dh.IronContent, dh.BloodBankName, dh.BloodGroup 
+        FROM donor_personal dp
+        LEFT JOIN donor_health dh ON dp.DonorID = dh.DonorID";
+$result = $conn->query($sql);
